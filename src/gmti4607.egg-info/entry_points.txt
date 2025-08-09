@@ -1,0 +1,2 @@
+[console_scripts]
+gmti4607 = gmti4607.cli:main

@@ -1,0 +1,82 @@
+Metadata-Version: 2.4
+Name: gmti4607
+Version: 0.1.0
+Summary: Pydantic-first STANAG 4607 GMTI reader/writer and XML converter with minimal viz.
+Author: Your Name
+License: MIT License
+        
+        Copyright (c) 2025
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+        
+Project-URL: Homepage, https://github.com/CristianComan/4607gmti
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: pydantic>=2.6
+Provides-Extra: xml
+Requires-Dist: pydantic-xml>=2.8; extra == "xml"
+Requires-Dist: xmlschema>=2.5; extra == "xml"
+Provides-Extra: viz
+Requires-Dist: matplotlib>=3.7; extra == "viz"
+Provides-Extra: dev
+Requires-Dist: pytest>=8; extra == "dev"
+Requires-Dist: pytest-cov>=4; extra == "dev"
+Requires-Dist: mypy>=1.10; extra == "dev"
+Requires-Dist: ruff>=0.5.0; extra == "dev"
+Requires-Dist: types-requests; extra == "dev"
+Requires-Dist: hypothesis>=6.100; extra == "dev"
+Dynamic: license-file
+
+# 4607GMTI (gmti4607)
+
+A Pydantic-first Python package for reading, writing, displaying (lightweight), and converting **STANAG 4607** Ground Moving Target Indicator (GMTI) data.
+
+> Status: **Scaffold** (parsers and codecs are stubs). Intended for porting the Erlang [`s4607`](https://github.com/pentlandedge/s4607) library and adding XML read/write support.
+
+## Features (planned)
+- Binary ⇄ Pydantic models (round-trip for supported segments)
+- XML ⇄ Pydantic models (via `pydantic-xml`), with XSD validation
+- Minimal verification plots
+- CLI utilities
+- Type-checking, linting, tests, CI
+
+## Install (dev)
+```bash
+pip install -e '.[dev,xml,viz]'
+```
+
+## CLI
+```bash
+gmti4607 info sample.bin
+gmti4607 to-xml sample.bin out.xml --validate
+gmti4607 from-xml sample.xml out.bin
+gmti4607 to-json sample.bin out.json
+gmti4607 plot sample.bin --mode detections
+```
+
+## Layout
+```
+src/gmti4607/
+  models/      # Pydantic models
+  binary/      # binary reader/writer codecs
+  xmlio/       # XML bindings
+  viz.py       # tiny matplotlib helpers
+  cli.py       # argparse-based CLI
+```
